@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta - Día de la Mujer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            perspective: 1000px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1) 0%, rgba(255, 192, 203, 0.2) 100%);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+           padding: 60px 40px 90px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .flowers-top {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .flower {
+            font-size: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .flower:nth-child(1) { animation-delay: 0s; }
+        .flower:nth-child(2) { animation-delay: 0.3s; }
+        .flower:nth-child(3) { animation-delay: 0.6s; }
+
+        h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    color: #ff1493;
+    margin-bottom: 12px;
+    animation: fadeInDown 0.8s ease-out 0.2s both;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+        .subtitle {
+    font-size: 17px;
+    color: rgba(255, 20, 147, 0.85);
+    margin-bottom: 25px;
+    animation: fadeInDown 0.8s ease-out 0.4s both;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff1493, transparent);
+            margin: 25px auto;
+            animation: fadeInDown 0.8s ease-out 0.6s both;
+        }
+
+        .message {
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.9;
+    margin: 25px auto 15px auto;
+    max-width: 360px;
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out 0.8s both;
+    font-weight: 500;
+}
+
+        .hearts-container {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin: 35px 0;
+    flex-wrap: wrap;
+}
+
+        .heart {
+            font-size: 28px;
+            animation: heartBeat 1.2s ease-in-out infinite;
+        }
+
+        .heart:nth-child(1) { animation-delay: 0s; }
+        .heart:nth-child(2) { animation-delay: 0.2s; }
+        .heart:nth-child(3) { animation-delay: 0.4s; }
+        .heart:nth-child(4) { animation-delay: 0.6s; }
+        .heart:nth-child(5) { animation-delay: 0.8s; }
+
+        .button-container {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    animation: fadeInUp 0.8s ease-out 1s both;
+}
+
+        button {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 15px 45px rgba(255, 0, 110, 0.7);
+}
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .flowers-bottom {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 1.2s both;
+        }
+
+        .flower-bottom {
+            font-size: 35px;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .flower-bottom:nth-child(1) { animation-delay: 0s; }
+        .flower-bottom:nth-child(2) { animation-delay: 0.5s; }
+        .flower-bottom:nth-child(3) { animation-delay: 1s; }
+
+        /* Animaciones */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) rotateX(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.3);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes sway {
+            0%, 100% {
+                transform: rotate(-2deg);
+            }
+            50% {
+                transform: rotate(2deg);
+            }
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        /* Partículas de fondo */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(1);
+            }
+        }
+
+        /* Control de música */
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            animation: slideInRight 0.8s ease-out 1.5s both;
+        }
+
+        .music-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.6);
+        }
+
+        .music-btn:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Visualizador de música */
+        .music-visualizer {
+            position: fixed;
+            bottom: 100px;
+            right: 45px;
+            width: 30px;
+            height: 100px;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 100;
+        }
+
+        .music-visualizer.active {
+            opacity: 1;
+        }
+
+        .bar {
+            width: 4px;
+            background: linear-gradient(180deg, #ff1493, #ff69b4);
+            border-radius: 2px;
+            animation: musicBars 0.6s ease-in-out infinite;
+        }
+
+        .bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .bar:nth-child(2) { height: 35px; animation-delay: 0.1s; }
+        .bar:nth-child(3) { height: 50px; animation-delay: 0.2s; }
+        .bar:nth-child(4) { height: 35px; animation-delay: 0.3s; }
+        .bar:nth-child(5) { height: 20px; animation-delay: 0.4s; }
+
+        @keyframes musicBars {
+            0%, 100% { height: 20px; }
+            50% { height: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="content">
+                <div class="flowers-top">
+                    <div class="flower">🌸</div>
+                    <div class="flower">🌷</div>
+                    <div class="flower">🌹</div>
+                </div>
+
+                <h1>¡Feliz Día de la Mujer!</h1>
+                <p class="subtitle">Para la mujer más especial</p>
+                
+                <div class="divider"></div>
+
+                <p class="message">
+    Quiero aprovechar este momento para agradecerte por todo lo especial que has sido conmigo. 
+    Desde que llegaste a mi vida muchas cosas han cambiado para bien. Tu forma de ser, tu cariño 
+    y la manera en que me haces sentir hacen que cada día sea más bonito.
+</p>
+
+                <div class="hearts-container">
+                    <div class="heart">💕</div>
+                    <div class="heart">💖</div>
+                    <div class="heart">💗</div>
+                    <div class="heart">💝</div>
+                    <div class="heart">💓</div>
+                </div>
+
+                <p class="message">
+                    Gracias por ser mi inspiración, mi alegría y mi amor. 
+                    ¡Te amo!
+                </p>
+
+                <div class="button-container">
+                    <button onclick="surpriseMessage()">Sorpresa ✨</button>
+                </div>
+
+                <div class="flowers-bottom">
+                    <div class="flower-bottom">🌺</div>
+                    <div class="flower-bottom">🌻</div>
+                    <div class="flower-bottom">💐</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Control de música -->
+    <div class="music-control">
+        <button class="music-btn" id="musicBtn" title="Activar música">🎵</button>
+        <div class="music-visualizer" id="musicVisualizer">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <!-- Audio de YouTube -->
+    <audio id="bgMusic" loop>
+    <source src="musica.mpeg" type="audio/mpeg">
+</audio>
+
+    <script>
+        // Elementos de audio
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        const musicVisualizer = document.getElementById('musicVisualizer');
+        let isPlaying = false;
+
+        // Control de música
+        musicBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🎵';
+                musicVisualizer.classList.remove('active');
+                isPlaying = false;
+            } else {
+                bgMusic.play();
+                musicBtn.textContent = '⏸️';
+                musicVisualizer.classList.add('active');
+                isPlaying = true;
+            }
+        });
+
+        // Crear confeti de pétalos
+        function createPetal() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.innerHTML = ['🌸', '🌷', '🌹', '💕', '💖'][Math.floor(Math.random() * 5)];
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.fontSize = (20 + Math.random() * 20) + 'px';
+            particle.style.opacity = Math.random() * 0.5 + 0.5;
+            particle.style.animation = `floatParticle ${3 + Math.random() * 2}s ease-in forwards`;
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 5000);
+        }
+
+        // Crear pétalos cada cierto tiempo
+        setInterval(createPetal, 500);
+
+        // Función de sorpresa
+        function surpriseMessage() {
+            const messages = [
+                '💕 Eres la mejor decisión que tomé',
+                '✨ Tu sonrisa ilumina mis días',
+                '🌹 Te amo más cada día',
+                '💖 Eres mi razón de ser feliz',
+                '🌸 Eres hermosa por dentro y por fuera',
+                '💗 Gracias por existir',
+                '🎀 Eres mi reina',
+                '💝 Te amaré siempre'
+            ];
+            
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            
+            // Crear un modal
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 999;
+                animation: fadeInDown 0.3s ease-out;
+            `;
+            
+            const messageBox = document.createElement('div');
+            messageBox.style.cssText = `
+                background: linear-gradient(135deg, #ff1493, #ff69b4);
+                color: white;
+                padding: 40px 30px;
+                border-radius: 20px;
+                text-align: center;
+                font-size: 24px;
+                font-weight: 600;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                animation: slideIn 0.5s ease-out;
+                max-width: 80%;
+            `;
+            
+            messageBox.textContent = message;
+            modal.appendChild(messageBox);
+            document.body.appendChild(modal);
+            
+            // Cerrar al hacer click
+            modal.addEventListener('click', () => {
+                modal.style.animation = 'fadeInDown 0.3s ease-out reverse';
+                setTimeout(() => modal.remove(), 300);
+            });
+            
+            // Cerrar después de 4 segundos
+            setTimeout(() => {
+                if (modal.parentElement) {
+                    modal.style.animation = 'fadeInDown 0.3s ease-out reverse';
+                    setTimeout(() => modal.remove(), 300);
+                }
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
